@@ -46,7 +46,14 @@ app.use(async (ctx, next) => {
     await next();
   }
 });
-
+// 错误处理
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (error) {
+    console.log("error", error.message);
+  }
+});
 router(app);
-app.listen(4003);
-console.log("app start at 4003");
+app.listen(5001);
+console.log("app start at 5001");

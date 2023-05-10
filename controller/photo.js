@@ -29,10 +29,11 @@ module.exports = {
     });
   },
   editPhotos: async (ctx, next) => {
+    let albumId = ctx.request.querystring ? ctx.request.query.albumId : "";
     let isApproved =
       ctx.request.body.type === 0 ? null : ctx.request.body.type === 1;
     let res = await axios.put(
-      `https://api.syreo.cn/admin/photo/${ctx.params.id}`,
+      `https://api.syreo.cn/admin/photo/${ctx.params.id}?albumId=${albumId}`,
       { isApproved },
       {
         headers: { "x-session": ctx.state.token },
